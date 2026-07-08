@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- El subagente de arte/tema completará este archivo con todos los textos del juego. -->
+    <string name="app_name">¡BANG!</string>
+</resources>

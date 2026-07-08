@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Estrella de sheriff simplificada como icono provisional de la app. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#F2E3C6"
+        android:pathData="M54,26 L60.5,44.5 L80,45 L64.5,56.5 L70,75 L54,64 L38,75 L43.5,56.5 L28,45 L47.5,44.5 Z" />
+    <path
+        android:fillColor="#5D3A1A"
+        android:pathData="M54,48 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0" />
+</vector>
