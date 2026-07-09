@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Estrella de sheriff simplificada como icono provisional de la app. -->
+<!--
+    Estrella de sheriff original para el icono de la app: estrella de cinco puntas
+    con bolas en los vértices (como las placas clásicas), anillo interior grabado
+    y remache central, en dorado sobre madera oscura. Dibujo vectorial propio.
+-->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+
+    <!-- Halo suave detrás de la placa -->
     <path
-        android:fillColor="#F2E3C6"
-        android:pathData="M54,26 L60.5,44.5 L80,45 L64.5,56.5 L70,75 L54,64 L38,75 L43.5,56.5 L28,45 L47.5,44.5 Z" />
+        android:fillColor="#33E3C15A"
+        android:pathData="M54,54 m-34,0 a34,34 0 1,0 68,0 a34,34 0 1,0 -68,0" />
+
+    <!-- Estrella de cinco puntas (borde exterior dorado oscuro) -->
     <path
-        android:fillColor="#5D3A1A"
-        android:pathData="M54,48 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0" />
+        android:fillColor="#8A6B14"
+        android:pathData="M54,23.5 L61.7,45.2 L84.8,45.7 L66.5,59.8 L73.2,81.9 L54,68.9 L34.8,81.9 L41.5,59.8 L23.2,45.7 L46.3,45.2 Z" />
+
+    <!-- Estrella interior dorada clara -->
+    <path
+        android:fillColor="#E3C15A"
+        android:pathData="M54,27.5 L60.8,46.7 L81.2,47.1 L65,59.6 L70.9,79.1 L54,67.6 L37.1,79.1 L43,59.6 L26.8,47.1 L47.2,46.7 Z" />
+
+    <!-- Bolas en las cinco puntas -->
+    <path android:fillColor="#C79A2E" android:pathData="M54,23.5 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+    <path android:fillColor="#C79A2E" android:pathData="M84.8,45.7 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+    <path android:fillColor="#C79A2E" android:pathData="M73.2,81.9 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+    <path android:fillColor="#C79A2E" android:pathData="M34.8,81.9 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+    <path android:fillColor="#C79A2E" android:pathData="M23.2,45.7 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+
+    <!-- Anillo interior grabado -->
+    <path
+        android:strokeColor="#8A6B14"
+        android:strokeWidth="2"
+        android:fillColor="#00000000"
+        android:pathData="M54,56.5 m-11,0 a11,11 0 1,0 22,0 a11,11 0 1,0 -22,0" />
+
+    <!-- Remache central -->
+    <path
+        android:fillColor="#5B3A1E"
+        android:pathData="M54,56.5 m-5.5,0 a5.5,5.5 0 1,0 11,0 a5.5,5.5 0 1,0 -11,0" />
+    <path
+        android:fillColor="#F3E6C6"
+        android:pathData="M52,54.5 m-1.6,0 a1.6,1.6 0 1,0 3.2,0 a1.6,1.6 0 1,0 -3.2,0" />
 </vector>

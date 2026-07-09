@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_launcher_background">#5D3A1A</color>
+    <!-- Fondo del icono adaptativo: madera oscura de la mesa del saloon. -->
+    <color name="ic_launcher_background">#3A2313</color>
+
+    <!-- Paleta western/saloon (espejo de BangColors en Compose, para recursos XML). -->
+    <color name="bang_wood_darkest">#221108</color>
+    <color name="bang_wood_dark">#3A2313</color>
+    <color name="bang_wood_medium">#5B3A1E</color>
+    <color name="bang_parchment">#E9D5A4</color>
+    <color name="bang_parchment_light">#F3E6C6</color>
+    <color name="bang_saloon_red">#8C1F1F</color>
+    <color name="bang_gold">#C79A2E</color>
+    <color name="bang_gold_light">#E3C15A</color>
+    <color name="bang_ink">#2A1B0F</color>
 </resources>

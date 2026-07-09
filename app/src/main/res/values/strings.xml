@@ -1,5 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- El subagente de arte/tema completará este archivo con todos los textos del juego. -->
     <string name="app_name">¡BANG!</string>
+
+    <!-- ============ Pantallas / UI general ============ -->
+    <string name="menu_title">¡BANG!</string>
+    <string name="menu_subtitle">El juego de cartas del salvaje oeste</string>
+    <string name="menu_new_game">Nueva partida</string>
+    <string name="menu_exit">Salir</string>
+
+    <string name="setup_title">Configurar partida</string>
+    <string name="setup_players">Jugadores</string>
+    <string name="setup_difficulty">Dificultad</string>
+    <string name="setup_character">Tu personaje</string>
+    <string name="setup_character_random">Personaje al azar</string>
+    <string name="setup_player_name">Tu nombre</string>
+    <string name="setup_start">Empezar</string>
+    <string name="difficulty_easy">Fácil</string>
+    <string name="difficulty_medium">Normal</string>
+    <string name="difficulty_hard">Difícil</string>
+
+    <string name="game_deck">Mazo</string>
+    <string name="game_discard">Descartes</string>
+    <string name="game_your_hand">Tu mano</string>
+    <string name="game_turn_of">Turno de %1$s</string>
+    <string name="game_your_turn">¡Tu turno!</string>
+    <string name="game_pass">Pasar</string>
+    <string name="game_end_turn">Terminar turno</string>
+    <string name="game_draw">Robar</string>
+    <string name="game_play_card">Jugar carta</string>
+    <string name="game_discard_card">Descartar</string>
+    <string name="game_take_hit">Encajar el golpe</string>
+    <string name="game_choose_target">Elige un objetivo</string>
+    <string name="game_choose_card">Elige una carta</string>
+    <string name="game_choose_draw_source">Elige de dónde robar</string>
+    <string name="game_react_bang">¡Te están disparando! ¿Reaccionas?</string>
+    <string name="game_react_indians">¡Indios! Descarta un BANG! o pierde 1 vida</string>
+    <string name="game_react_duel">Duelo: descarta un BANG! o pierde 1 vida</string>
+    <string name="game_discard_to_limit">Descarta hasta el límite de tu mano (%1$d de más)</string>
+    <string name="game_event_log">Historial</string>
+    <string name="game_lives">Vidas</string>
+    <string name="game_cards_in_hand">Cartas en mano</string>
+    <string name="game_in_play">En juego</string>
+    <string name="game_range">Alcance %1$d</string>
+    <string name="game_distance">Distancia %1$d</string>
+
+    <string name="end_victory">¡Victoria!</string>
+    <string name="end_defeat">Derrota</string>
+    <string name="end_winners">Ganan: %1$s</string>
+    <string name="end_play_again">Jugar otra vez</string>
+    <string name="end_back_to_menu">Volver al menú</string>
+
+    <!-- ============ Roles ============ -->
+    <string name="role_sheriff">Sheriff</string>
+    <string name="role_deputy">Alguacil</string>
+    <string name="role_outlaw">Forajido</string>
+    <string name="role_renegade">Renegado</string>
+    <string name="role_team_sheriff">el Sheriff y sus Alguaciles</string>
+    <string name="role_team_outlaws">los Forajidos</string>
+    <string name="role_team_renegade">el Renegado</string>
+
+    <!-- ============ Cartas ============ -->
+    <string name="card_bang">¡BANG!</string>
+    <string name="card_missed">¡Fallaste!</string>
+    <string name="card_beer">Birra</string>
+    <string name="card_panic">¡Pánico!</string>
+    <string name="card_cat_balou">Cat Balou</string>
+    <string name="card_stagecoach">Diligencia</string>
+    <string name="card_wells_fargo">Wells Fargo</string>
+    <string name="card_gatling">Gatling</string>
+    <string name="card_indians">¡Indios!</string>
+    <string name="card_duel">Duelo</string>
+    <string name="card_general_store">Emporio</string>
+    <string name="card_saloon">Salón</string>
+    <string name="card_jail">Cárcel</string>
+    <string name="card_dynamite">Dinamita</string>
+    <string name="card_barrel">Barril</string>
+    <string name="card_mustang">Mustang</string>
+    <string name="card_scope">Mira</string>
+    <string name="card_volcanic">Volcanic</string>
+    <string name="card_schofield">Schofield</string>
+    <string name="card_remington">Remington</string>
+    <string name="card_rev_carabine">Rev. Carabine</string>
+    <string name="card_winchester">Winchester</string>
+
+    <string name="card_desc_bang">Dispara a un jugador a distancia igual o menor que tu alcance. Se cancela con ¡Fallaste!</string>
+    <string name="card_desc_missed">Cancela un BANG! dirigido a ti. Solo como reacción.</string>
+    <string name="card_desc_beer">Recupera 1 vida. Sin efecto si solo quedan 2 jugadores vivos.</string>
+    <string name="card_desc_panic">Roba una carta a un jugador a distancia 1.</string>
+    <string name="card_desc_cat_balou">Obliga a un jugador a descartar una carta. Sin límite de distancia.</string>
+    <string name="card_desc_stagecoach">Roba 2 cartas del mazo.</string>
+    <string name="card_desc_wells_fargo">Roba 3 cartas del mazo.</string>
+    <string name="card_desc_gatling">Un disparo BANG! contra todos los demás jugadores.</string>
+    <string name="card_desc_indians">Todos los demás descartan un BANG! o pierden 1 vida.</string>
+    <string name="card_desc_duel">Reta a un jugador: alternáis descartando BANG! hasta que uno no pueda y pierda 1 vida.</string>
+    <string name="card_desc_general_store">Se revelan tantas cartas como jugadores vivos; cada uno escoge una.</string>
+    <string name="card_desc_saloon">Todos los jugadores vivos recuperan 1 vida.</string>
+    <string name="card_desc_jail">Se juega delante de otro jugador (no el Sheriff): con Corazones escapa, si no pierde el turno.</string>
+    <string name="card_desc_dynamite">Circula entre jugadores. Picas 2-9 al «¡desenfunda!»: explota y pierde 3 vidas.</string>
+    <string name="card_desc_barrel">Al recibir un BANG!, «¡desenfunda!»: con Corazones cuenta como un ¡Fallaste!.</string>
+    <string name="card_desc_mustang">Los demás jugadores te ven a distancia +1.</string>
+    <string name="card_desc_scope">Ves a los demás jugadores a distancia -1.</string>
+    <string name="card_desc_volcanic">Arma de alcance 1. BANG! ilimitados en tu turno.</string>
+    <string name="card_desc_schofield">Arma de alcance 2.</string>
+    <string name="card_desc_remington">Arma de alcance 3.</string>
+    <string name="card_desc_rev_carabine">Arma de alcance 4.</string>
+    <string name="card_desc_winchester">Arma de alcance 5.</string>
+
+    <!-- ============ Personajes ============ -->
+    <string name="char_bart_cassidy">Bart Cassidy</string>
+    <string name="char_black_jack">Black Jack</string>
+    <string name="char_calamity_janet">Calamity Janet</string>
+    <string name="char_el_gringo">El Gringo</string>
+    <string name="char_jesse_jones">Jesse Jones</string>
+    <string name="char_jourdonnais">Jourdonnais</string>
+    <string name="char_kit_carlson">Kit Carlson</string>
+    <string name="char_lucky_duke">Lucky Duke</string>
+    <string name="char_paul_regret">Paul Regret</string>
+    <string name="char_pedro_ramirez">Pedro Ramírez</string>
+    <string name="char_rose_doolan">Rose Doolan</string>
+    <string name="char_sid_ketchum">Sid Ketchum</string>
+    <string name="char_slab_the_killer">Slab the Killer</string>
+    <string name="char_suzy_lafayette">Suzy Lafayette</string>
+    <string name="char_vulture_sam">Vulture Sam</string>
+    <string name="char_willy_the_kid">Willy the Kid</string>
+
+    <string name="char_desc_bart_cassidy">Cada vez que pierde un punto de vida, roba 1 carta del mazo.</string>
+    <string name="char_desc_black_jack">Al robar, enseña la 2ª carta: si es Corazones o Diamantes, roba una más.</string>
+    <string name="char_desc_calamity_janet">Puede jugar sus BANG! como ¡Fallaste! y viceversa.</string>
+    <string name="char_desc_el_gringo">Cuando un jugador le hace perder vida, le roba 1 carta de la mano.</string>
+    <string name="char_desc_jesse_jones">Puede robar su 1ª carta de la mano de otro jugador.</string>
+    <string name="char_desc_jourdonnais">Se considera que siempre tiene un Barril en juego.</string>
+    <string name="char_desc_kit_carlson">Al robar, mira las 3 primeras cartas y se queda 2.</string>
+    <string name="char_desc_lucky_duke">En cada «¡desenfunda!» voltea 2 cartas y elige una.</string>
+    <string name="char_desc_paul_regret">Los demás lo ven a distancia +1.</string>
+    <string name="char_desc_pedro_ramirez">Puede robar su 1ª carta de la pila de descartes.</string>
+    <string name="char_desc_rose_doolan">Ve a los demás a distancia -1.</string>
+    <string name="char_desc_sid_ketchum">Puede descartar 2 cartas para recuperar 1 vida.</string>
+    <string name="char_desc_slab_the_killer">Hacen falta 2 ¡Fallaste! para cancelar sus BANG!.</string>
+    <string name="char_desc_suzy_lafayette">Si se queda sin cartas en la mano, roba 1 del mazo.</string>
+    <string name="char_desc_vulture_sam">Cuando un personaje es eliminado, toma todas sus cartas.</string>
+    <string name="char_desc_willy_the_kid">Puede jugar tantos BANG! como quiera en su turno.</string>
 </resources>
