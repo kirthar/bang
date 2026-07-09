@@ -660,10 +660,11 @@ class BangGameEngine private constructor(
         emit(GameEvent.CardsDrawn(top.awaitingSeat, listOf(card), 1, revealed = false))
         pending.removeLast()
         val kept = top.keptSoFar + 1
-        if (kept < 2) {
-            pending.addLast(KitCarlsonInteraction(top.awaitingSeat, top.pool - card, kept))
+        val remainingPool = top.pool - card
+        if (kept < 2 && remainingPool.isNotEmpty()) {
+            pending.addLast(KitCarlsonInteraction(top.awaitingSeat, remainingPool, kept))
         } else {
-            finishDrawPhase() // la carta sobrante permanece en la cima del mazo
+            finishDrawPhase() // la carta sobrante (si la hay) permanece en la cima del mazo
         }
     }
 

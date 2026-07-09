@@ -69,7 +69,9 @@ internal object JourdonnaisAbility : CharacterAbility {
 internal object KitCarlsonAbility : CharacterAbility {
     override val character = CharacterId.KIT_CARLSON
     override fun onDrawPhase(ctx: AbilityContext): Boolean {
-        ctx.requestDecision(KitCarlsonInteraction(ctx.selfSeat, ctx.deckPeek(3), keptSoFar = 0))
+        val pool = ctx.deckPeek(3)
+        if (pool.isEmpty()) return false // mazo agotado: robo estándar (robará lo que pueda)
+        ctx.requestDecision(KitCarlsonInteraction(ctx.selfSeat, pool, keptSoFar = 0))
         return true
     }
 }
