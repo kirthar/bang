@@ -39,12 +39,12 @@ data class PlayerState(
 /**
  * Interacción pendiente de resolver (reacciones, elecciones, duelo…).
  *
- * Interfaz sellada a propósito de forma abierta dentro del módulo: el motor define
- * sus implementaciones concretas en `com.kirthar.bang.core.engine`. El estado las
- * transporta para que la partida sea serializable/restaurable (clave para el online
- * y para la determinización de MCTS).
+ * Interfaz abierta dentro del módulo: el motor define sus implementaciones concretas
+ * en `com.kirthar.bang.core.engine` (no puede ser `sealed`, pues sus subtipos viven en
+ * otro paquete). El estado las transporta para que la partida sea serializable/
+ * restaurable (clave para el online y para la determinización de MCTS).
  */
-sealed interface PendingInteraction {
+interface PendingInteraction {
     /** Asiento que debe actuar ahora para resolver esta interacción. */
     val awaitingSeat: Int
 }
