@@ -1,5 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- El subagente de arte/tema completará este archivo con todos los textos del juego. -->
     <string name="app_name">¡BANG!</string>
+
+    <!-- Menú principal -->
+    <string name="menu_subtitle">El juego de cartas del salvaje Oeste</string>
+    <string name="menu_new_game">Nueva partida</string>
+    <string name="menu_online">Online (próximamente)</string>
+    <string name="menu_options">Opciones (próximamente)</string>
+
+    <!-- Configuración de partida -->
+    <string name="setup_title">Configurar partida</string>
+    <string name="setup_players_count">Número de jugadores</string>
+    <string name="setup_difficulty">Dificultad de la IA</string>
+    <string name="setup_difficulty_easy">Fácil</string>
+    <string name="setup_difficulty_medium">Media</string>
+    <string name="setup_difficulty_hard">Difícil</string>
+    <string name="setup_player_name">Tu nombre</string>
+    <string name="setup_player_name_hint">Jugador</string>
+    <string name="setup_character">Personaje</string>
+    <string name="setup_character_random">Aleatorio</string>
+    <string name="setup_character_random_description">El destino elegirá tu personaje.</string>
+    <string name="setup_start">Empezar</string>
+    <string name="action_back">Volver</string>
+
+    <!-- Partida -->
+    <string name="game_loading">Preparando la partida…</string>
+    <string name="game_log_title">Registro</string>
+    <string name="game_your_turn">¡Es tu turno!</string>
+    <string name="game_turn_of">Turno de %1$s</string>
+    <string name="game_waiting_others">Esperando a los demás jugadores…</string>
+    <string name="game_end_turn">Terminar turno</string>
+    <string name="game_use_ability">Usar habilidad</string>
+    <string name="game_ability_hint">Toca las cartas de tu mano que quieras descartar para la habilidad.</string>
+    <string name="game_take_hit">Encajar el golpe</string>
+    <string name="game_react_prompt">%2$s te ataca con %1$s. ¿Respondes?</string>
+    <string name="game_discard_prompt">Debes descartar %1$d carta(s): toca las cartas de tu mano.</string>
+    <string name="game_choose_draw_source">Elige de dónde robar:</string>
+    <string name="game_draw_from_deck">Del mazo</string>
+    <string name="game_draw_from_discard">De los descartes</string>
+    <string name="game_draw_from_player">De la mano de %1$s</string>
+    <string name="game_pick_general_store">Emporio: elige una carta.</string>
+    <string name="game_pick_kit_carlson">Elige la carta que te quedas.</string>
+    <string name="game_pick_lucky_duke">«¡Desenfunda!»: elige la carta que se aplica.</string>
+    <string name="game_pick_panic_target">Elige qué carta robar o descartar.</string>
+
+    <!-- Fin de partida -->
+    <string name="gameover_title">Fin de la partida</string>
+    <string name="gameover_winner">Ganan: %1$s</string>
+    <string name="gameover_team_sheriff">el Sheriff y sus Alguaciles</string>
+    <string name="gameover_team_outlaws">los Forajidos</string>
+    <string name="gameover_team_renegade">el Renegado</string>
+    <string name="gameover_roles">Roles revelados</string>
+    <string name="gameover_winner_mark">ganador</string>
+    <string name="gameover_rematch">Revancha</string>
+    <string name="gameover_menu">Menú</string>
 </resources>
