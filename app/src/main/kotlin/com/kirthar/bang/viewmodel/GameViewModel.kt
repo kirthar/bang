@@ -117,6 +117,7 @@ class GameViewModel(private val setup: GameSetupConfig) : ViewModel() {
     fun onHandCardTap(cardId: Int) {
         val request = currentRequest() ?: return
         val sel = _selection.value
+        if (sel.pendingPlay != null) return // hay una jugada esperando confirmación
         when (request) {
             is DecisionRequest.PlayOrPass ->
                 if (sel.abilityMode) {
@@ -143,7 +144,7 @@ class GameViewModel(private val setup: GameSetupConfig) : ViewModel() {
         val withoutTarget = matches.firstOrNull { it.targetSeat == null }
         val targetSeats = matches.mapNotNull { it.targetSeat }.toSet()
         if (targetSeats.isEmpty() && withoutTarget != null) {
-            submitCommand(withoutTarget)
+            _selection.value = UiSelectionState(pendingPlay = withoutTarget)
         } else {
             _selection.value = UiSelectionState(selectedCardId = cardId, targetableSeats = targetSeats)
         }
@@ -153,11 +154,18 @@ class GameViewModel(private val setup: GameSetupConfig) : ViewModel() {
     fun onTargetSeatTap(seat: Int) {
         val request = currentRequest() as? DecisionRequest.PlayOrPass ?: return
         val sel = _selection.value
+        if (sel.pendingPlay != null) return // hay una jugada esperando confirmación
         val cardId = sel.selectedCardId ?: return
         if (seat !in sel.targetableSeats) return
         val option = request.options.filterIsInstance<GameCommand.PlayCard>()
             .firstOrNull { it.cardId == cardId && it.targetSeat == seat } ?: return
-        submitCommand(option)
+        _selection.value = sel.copy(targetableSeats = emptySet(), pendingPlay = option)
+    }
+
+    /** Confirma en el diálogo la jugada pendiente y la envía al motor. */
+    fun onConfirmPlay() {
+        val pending = _selection.value.pendingPlay ?: return
+        submitCommand(pending)
     }
 
     /** El jugador toca una de las cartas ofrecidas (Emporio, Kit Carlson, «¡desenfunda!» de Lucky Duke...). */

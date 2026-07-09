@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,18 +16,24 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kirthar.bang.R
 import com.kirthar.bang.core.command.DrawSource
 import com.kirthar.bang.core.command.GameCommand
+import com.kirthar.bang.core.model.Card
 import com.kirthar.bang.core.view.DecisionRequest
 import com.kirthar.bang.core.view.PickPurpose
 import com.kirthar.bang.core.view.PlayerGameView
@@ -40,6 +47,7 @@ import com.kirthar.bang.ui.components.GameTexts
 import com.kirthar.bang.ui.components.PlayerBadge
 import com.kirthar.bang.ui.components.TableBackground
 import com.kirthar.bang.ui.components.WesternButton
+import com.kirthar.bang.ui.theme.BangColors
 import com.kirthar.bang.ui.theme.BangTheme
 import com.kirthar.bang.viewmodel.GameViewModel
 import com.kirthar.bang.viewmodel.LogEntry
@@ -78,6 +86,8 @@ fun GameScreen(viewModel: GameViewModel) {
         onTakeHit = viewModel::onTakeHit,
         onEndPlayPhase = viewModel::onEndPlayPhase,
         onToggleAbilityMode = viewModel::onToggleAbilityMode,
+        onConfirmPlay = viewModel::onConfirmPlay,
+        onCancelPlay = viewModel::onCancelSelection,
     )
 }
 
@@ -93,9 +103,12 @@ private fun GameScreenContent(
     onTakeHit: () -> Unit,
     onEndPlayPhase: () -> Unit,
     onToggleAbilityMode: () -> Unit,
+    onConfirmPlay: () -> Unit,
+    onCancelPlay: () -> Unit,
 ) {
     val request = view.myPendingRequest
     val playableIds = playableCardIds(request, selection.abilityMode)
+    var zoomedCard by remember { mutableStateOf<Card?>(null) }
 
     TableBackground(modifier = Modifier.fillMaxSize()) {
         Row(modifier = Modifier.fillMaxSize()) {
@@ -151,17 +164,22 @@ private fun GameScreenContent(
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                // Mano propia
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                // Mano propia: cartas grandes y legibles; mantener pulsada para ampliar.
+                Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.height(150.dp)) {
                     PlayerBadge(player = view.me, isCurrentTurn = view.currentTurnSeat == view.mySeat)
                     Spacer(modifier = Modifier.width(8.dp))
-                    LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    LazyRow(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier.fillMaxHeight(),
+                    ) {
                         items(view.myHand) { card ->
                             CardView(
                                 card = card,
                                 selected = card.id == selection.selectedCardId || card.id in selection.multiSelected,
                                 enabled = card.id in playableIds,
                                 onClick = { onHandCardTap(card.id) },
+                                onLongClick = { zoomedCard = card },
+                                modifier = Modifier.fillMaxHeight(),
                             )
                         }
                     }
@@ -186,6 +204,61 @@ private fun GameScreenContent(
                         )
                     }
                 }
+            }
+        }
+
+        zoomedCard?.let { card ->
+            EnlargedCardDialog(card = card, onDismissRequest = { zoomedCard = null }) {
+                WesternButton(text = stringResource(R.string.action_close), onClick = { zoomedCard = null })
+            }
+        }
+
+        val pending = selection.pendingPlay
+        if (pending != null) {
+            val card = view.myHand.firstOrNull { it.id == pending.cardId }
+            if (card != null) {
+                val targetName = pending.targetSeat
+                    ?.let { seat -> view.players.firstOrNull { it.seat == seat }?.name }
+                val caption = if (targetName != null) {
+                    stringResource(R.string.game_confirm_play_target, GameTexts.cardName(card.kind), targetName)
+                } else {
+                    stringResource(R.string.game_confirm_play, GameTexts.cardName(card.kind))
+                }
+                EnlargedCardDialog(card = card, caption = caption, onDismissRequest = onCancelPlay) {
+                    WesternButton(text = stringResource(R.string.action_cancel), onClick = onCancelPlay)
+                    WesternButton(text = stringResource(R.string.game_confirm), onClick = onConfirmPlay)
+                }
+            }
+        }
+    }
+}
+
+/** Diálogo con una carta a tamaño grande, un pie opcional y las acciones que se le pasen. */
+@Composable
+private fun EnlargedCardDialog(
+    card: Card,
+    onDismissRequest: () -> Unit,
+    caption: String? = null,
+    actions: @Composable RowScope.() -> Unit,
+) {
+    Dialog(onDismissRequest = onDismissRequest) {
+        Surface(
+            shape = MaterialTheme.shapes.large,
+            color = BangColors.WoodPlank,
+            contentColor = BangColors.ParchmentLight,
+            tonalElevation = 8.dp,
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(20.dp),
+            ) {
+                CardView(card = card, modifier = Modifier.height(260.dp))
+                if (caption != null) {
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(text = caption, style = MaterialTheme.typography.titleSmall)
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp), content = actions)
             }
         }
     }
@@ -260,7 +333,11 @@ private fun ActionArea(
             Spacer(modifier = Modifier.height(6.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 request.cards.forEach { card ->
-                    CardView(card = card, onClick = { onOfferedCardTap(card.id) })
+                    CardView(
+                        card = card,
+                        onClick = { onOfferedCardTap(card.id) },
+                        modifier = Modifier.width(100.dp),
+                    )
                 }
             }
         }
@@ -322,6 +399,8 @@ private fun GameScreenMidGamePreview() {
             onTakeHit = {},
             onEndPlayPhase = {},
             onToggleAbilityMode = {},
+            onConfirmPlay = {},
+            onCancelPlay = {},
         )
     }
 }
@@ -341,6 +420,8 @@ private fun GameScreenReactPreview() {
             onTakeHit = {},
             onEndPlayPhase = {},
             onToggleAbilityMode = {},
+            onConfirmPlay = {},
+            onCancelPlay = {},
         )
     }
 }

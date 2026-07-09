@@ -10,6 +10,8 @@
     <string name="menu_online">Online (próximamente)</string>
     <string name="menu_options">Opciones (próximamente)</string>
     <string name="action_back">Volver</string>
+    <string name="action_close">Cerrar</string>
+    <string name="action_cancel">Cancelar</string>
 
     <string name="setup_players_count">Número de jugadores</string>
     <string name="setup_difficulty_easy">Fácil</string>
@@ -32,6 +34,9 @@
     <string name="game_pick_kit_carlson">Elige la carta que te quedas.</string>
     <string name="game_pick_lucky_duke">«¡Desenfunda!»: elige la carta que se aplica.</string>
     <string name="game_pick_panic_target">Elige qué carta robar o descartar.</string>
+    <string name="game_confirm_play">¿Jugar %1$s?</string>
+    <string name="game_confirm_play_target">¿Jugar %1$s sobre %2$s?</string>
+    <string name="game_confirm">Jugar</string>
 
     <string name="gameover_title">Fin de la partida</string>
     <string name="gameover_winner">Ganan: %1$s</string>

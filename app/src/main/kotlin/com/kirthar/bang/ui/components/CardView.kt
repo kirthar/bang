@@ -1,9 +1,11 @@
 package com.kirthar.bang.ui.components
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -51,7 +53,10 @@ import com.kirthar.bang.ui.theme.BangColors
  * @param selected resalta la carta con borde dorado y más elevación (carta elegida).
  * @param enabled si es `false`, la carta se atenúa y no responde a toques.
  * @param onClick acción al tocar la carta; si es `null` la carta no es interactiva.
+ * @param onLongClick acción opcional al mantener pulsada la carta (p. ej. ampliarla
+ *   sin efectos sobre la partida). Si es `null`, la carta solo responde a [onClick].
  */
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CardView(
     card: Card?,
@@ -60,6 +65,7 @@ fun CardView(
     selected: Boolean = false,
     enabled: Boolean = true,
     onClick: (() -> Unit)? = null,
+    onLongClick: (() -> Unit)? = null,
 ) {
     val shape = RoundedCornerShape(10.dp)
     val showFace = faceUp && card != null
@@ -78,7 +84,17 @@ fun CardView(
             .alpha(if (enabled) 1f else 0.4f)
             .shadow(elevation, shape, clip = false)
             .clip(shape)
-            .let { m -> if (onClick != null) m.clickable(enabled = enabled, onClick = onClick) else m }
+            .let { m ->
+                when {
+                    onLongClick != null -> m.combinedClickable(
+                        enabled = enabled,
+                        onClick = onClick ?: {},
+                        onLongClick = onLongClick,
+                    )
+                    onClick != null -> m.clickable(enabled = enabled, onClick = onClick)
+                    else -> m
+                }
+            }
             .background(
                 if (showFace) {
                     Brush.verticalGradient(listOf(BangColors.ParchmentLight, BangColors.Parchment))
