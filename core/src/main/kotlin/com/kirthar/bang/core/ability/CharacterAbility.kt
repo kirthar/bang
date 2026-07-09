@@ -75,6 +75,13 @@ interface AbilityContext {
     fun takeAllCardsFrom(seat: Int)
 
     /**
+     * Mira (sin retirarlas) las [count] cartas de la cima del mazo, rebarajando los
+     * descartes si hiciera falta (Kit Carlson). Extensión de Fase 1 respecto al
+     * contrato original de [AbilityContext]; documentada en el informe final.
+     */
+    fun deckPeek(count: Int): List<Card>
+
+    /**
      * Pide al dueño una decisión intermedia (Jesse Jones: ¿de quién robo?;
      * Kit Carlson: ¿qué 2 me quedo?). El motor la encola como interacción pendiente.
      */
